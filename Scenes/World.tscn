@@ -1,22 +1,27 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/paddle.gd" type="Script" id=1]
 [ext_resource path="res://Assets/paddle.png" type="Texture" id=2]
-[ext_resource path="res://Scripts/ball.gd" type="Script" id=3]
-[ext_resource path="res://Assets/ball.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Ball.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Tile.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/World.gd" type="Script" id=6]
+[ext_resource path="res://Assets/OstrichSans-Heavy.otf" type="DynamicFontData" id=7]
+[ext_resource path="res://Scripts/score.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/lives.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 53.311, 12.2888 )
 
-[sub_resource type="PhysicsMaterial" id=2]
-friction = 0.0
-bounce = 1.0
+[sub_resource type="DynamicFont" id=4]
+size = 18
+font_data = ExtResource( 7 )
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 12.018
+[sub_resource type="DynamicFont" id=5]
+size = 18
+font_data = ExtResource( 7 )
 
 [node name="World" type="Node"]
+script = ExtResource( 6 )
 
 [node name="Paddle" type="KinematicBody2D" parent="."]
 position = Vector2( 512, 544 )
@@ -31,24 +36,7 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Paddle"]
 shape = SubResource( 1 )
 
-[node name="Ball" type="RigidBody2D" parent="."]
-position = Vector2( 512, 480 )
-mode = 2
-physics_material_override = SubResource( 2 )
-gravity_scale = 0.0
-linear_velocity = Vector2( 200, -200 )
-linear_damp = 0.0
-angular_damp = 0.0
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="Ball"]
-texture = ExtResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
-shape = SubResource( 3 )
+[node name="Ball" parent="." instance=ExtResource( 3 )]
 
 [node name="Wall" type="StaticBody2D" parent="."]
 
@@ -281,3 +269,26 @@ position = Vector2( 772, 384 )
 
 [node name="Tile11" parent="Tiles/Yellow Tiles" instance=ExtResource( 5 )]
 position = Vector2( 840, 384 )
+
+[node name="Score" type="Label" parent="."]
+margin_right = 80.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 4 )
+text = "Score:"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lives" type="Label" parent="."]
+margin_left = 979.026
+margin_top = 0.891953
+margin_right = 1027.03
+margin_bottom = 23.892
+custom_fonts/font = SubResource( 5 )
+text = "Lives:"
+align = 2
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
