@@ -18,7 +18,7 @@ As usual, Fork and Clone this repository. Pay attention to where (on the file sy
  * Now select the Lives label, change the Text to "Lives:" and add the same font (and the same font size) to this label
  * _When editing the following scripts, make sure you indent using tabs. If you copy the code from this page, it will be indented with spaces; you will need to change that._
  * Right-click on the World node and Attach Script. Name the script res://Scripts/world.gd
- * Delete lines 2–8 and replace them with the following:
+ * Delete lines 2–17 and replace them with the following:
  ```
  export var score = 0
  export var lives = 3
@@ -32,7 +32,7 @@ As usual, Fork and Clone this repository. Pay attention to where (on the file sy
   find_node("Lives").update_lives()
  ```
  * Right-click on Score and Attach Script. Name the script res://Scripts/score.gd
- * Delete lines 2–8 and replace them with the following:
+ * Delete lines 2–17 and replace them with the following:
  ```
  func _ready():
   update_score()
@@ -41,7 +41,7 @@ As usual, Fork and Clone this repository. Pay attention to where (on the file sy
   text = "Score: " + str(get_parent().score)
  ```
  * Right-click on Lives and Attach Script. Name the script res://Scripts/lives.gd
- * Delete lines 2–8 and replace them with the following:
+ * Delete lines 2–17 and replace them with the following:
  ```
  func _ready():
   update_lives()
